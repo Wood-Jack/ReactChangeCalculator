@@ -7,7 +7,7 @@
 
   <title>Change Calculator</title>
 
-  <style>
+  <style data-parcel-key="487b0c3bcbc077d23946688aa361a22b">
 
     body {
       /* Source: https://uigradients.com */
@@ -21,7 +21,7 @@
 <body>
   <div id="root"></div>
 
-  <script src="../src/index.jsx"></script>
+  <script src="08a027bd791baf195e049fdb703efa39"></script>
 </body>
 
 </html>
