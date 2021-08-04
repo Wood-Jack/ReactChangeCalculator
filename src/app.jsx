@@ -44,7 +44,7 @@ class App extends React.Component {
     const fives = 5.00;
 
     const dollar= 1.00;
-    const quarter= .25;
+    const quarter= .25; 
     const dime= .10;
     const nickel = .05;
     const penny = .01;
@@ -59,7 +59,7 @@ class App extends React.Component {
     const nickelBack = moneyBack / nickel;
     const pennyBack = moneyBack / penny;
 
-    return " Twenties: " + twentiesBack + " Tens: " + tensBack + " Fives: " + fivesBack +
+    return " Change Due: " + moneyBack +" Twenties: " + twentiesBack + " Tens: " + tensBack + " Fives: " + fivesBack +
     " Dollars: " + dollarsBack + " Quarters: " + quartersBack +
     " Dimes: " + dimeBack + " Nickels: " + nickelBack +
     " Pennines: " + pennyBack ;
@@ -78,9 +78,12 @@ class App extends React.Component {
           <div className = "col">
             <div className =" panel-body">
               <label>Cost of Item</label>
-            <input  className="Due"></input>
+
+            <input  className="Due" type = "number" value={this.state.moneyDue} onChange= {this.moneyDueChange} ></input>
+
               <label>Money Given</label>
-            <input  className="Rec"></input>
+
+            <input  className="Rec" type = "number" value={this.state.moneyRec} onChange = {this.moneyRecChange}></input>
             <button  className= "submitBtn">Calculate</button>
             </div>
           
@@ -96,7 +99,7 @@ class App extends React.Component {
           </div>
 
           <div className="grid-Deno">
-            <div className ="col-twenties" >Twenties:</div>
+            <div className ="col-twenties" onClick= {this.calChange} >Twenties:</div>
             <div  className ="col-tens">Tens:</div>
             <div className ="col-fives">Fives:</div>
             <div className ="col-ones">Ones:</div> 
