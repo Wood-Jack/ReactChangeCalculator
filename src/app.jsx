@@ -1,12 +1,13 @@
+
 import React, { Component } from 'react';
 
 class App extends React.Component {
 
   constructor(props) {
-    
+
     super(props);
 
-    this.state={moneyDue: ' ', moneyRec: ' ' , payment: ''}
+    this.state={moneyDue: ' ', moneyRec: ' ' , changeOutput: ''};
 
     this.moneyDueChange = this.moneyDueChange.bind(this);
     this.moneyRecChange = this.moneyRecChange.bind(this);
@@ -15,12 +16,25 @@ class App extends React.Component {
   }
   
   moneyDueChange(e){
-    this.setState({moneyDue: e.target.value});
+    this.setState({moneyDue: e.target.value}); 
   }
 
   moneyRecChange(e){
+    this.setState({moneyRec: e.target.value}); 
+  }
 
-    this.setState({moneyRec: e.target.value});
+  displayAlert(e){
+
+    if(this.state.changeDue >= 0)
+    { 
+
+      this.setState({changeOutput: e.target.value });
+
+    }
+    else(this.state.changDue < 0)
+    {
+
+    }
 
   }
 
@@ -28,90 +42,71 @@ class App extends React.Component {
   {
 
     e.preventDefault();
+
     const moneyDue = this.state.moneyDue;
     const moneyRec= this.state.moneyRec;
 
-    const payment = this.calculate(moneyDue, moneyRec);
-
-    return "Customer change: "+ payment;
+    const changeDue = ( moneyRec- moneyDue);
+    
+    this.setState({
+      changeOutput: changeDue, twenties:(parseFloat(calcChange%20.00).toFixed(0)) ,tens: (parseFloat(calcChange/10.00).toFixed(0) ),fives:(parseFloat(calcChange/5.00).toFixed(0)),
+      ones: (parseFloat(calcChange/1.00 ).toFixed(0)) , quarter:(parseFloat(calcChange/.25 ).toFixed(0)), dime:(parseFloat(calcChange/ .10).toFixed(0)), nickel:(parseFloat(calcChange/ .05).toFixed(0)) , penny: (parseFloat(calcChange / .01).toFixed(0))
+    });
 
   }
 
-  calculate(moneyDue, moneyRec){
-
-    const twenties = 20.00;
-    const tens = 10.00;
-    const fives = 5.00;
-
-    const dollar= 1.00;
-    const quarter= .25; 
-    const dime= .10;
-    const nickel = .05;
-    const penny = .01;
-
-    const moneyBack = moneyDue - moneyRec;
-    const twentiesBack = moneyBack / twenties;
-    const tensBack = moneyBack / tens;
-    const fivesBack = moneyBack / fives;
-    const dollarsBack = moneyBack / dollar;
-    const quartersBack = moneyBack / quarter;
-    const dimeBack = moneyBack / dime;
-    const nickelBack = moneyBack / nickel;
-    const pennyBack = moneyBack / penny;
-
-    return " Change Due: " + moneyBack +" Twenties: " + twentiesBack + " Tens: " + tensBack + " Fives: " + fivesBack +
-    " Dollars: " + dollarsBack + " Quarters: " + quartersBack +
-    " Dimes: " + dimeBack + " Nickels: " + nickelBack +
-    " Pennines: " + pennyBack ;
-
-  } 
 
   render() {
 
 
     return(
 
-      <div className =" container">
+      <div className ="container d-flex justify-content-center mt-5 " >
          
         <div className ="row">
           
-          <div className = "col">
-            <div className =" panel-body">
-              <label>Cost of Item</label>
-
+          <div className = "col-4">
+            <div className =" panel-body bg-light" id="firstCon">
+              <label>Cost of Item / Money Due </label>
             <input  className="Due" type = "number" value={this.state.moneyDue} onChange= {this.moneyDueChange} ></input>
-
-              <label>Money Given</label>
-
+              <label> Money Given </label>
             <input  className="Rec" type = "number" value={this.state.moneyRec} onChange = {this.moneyRecChange}></input>
-            <button  className= "submitBtn">Calculate</button>
+            <button  className= "submitBtn" onClick = {this.calChange}>Calculate</button>
             </div>
+          </div> 
           
-          </div>
-          
-          <div className="outcome-Alert">
-            <div className ="totalChange">Total Change:
-            </div>
+          <div className="col-8 ">
             
-            <div className ="additional money">Additional money:
-            </div>
-          
-          </div>
 
-          <div className="grid-Deno">
-            <div className ="col-twenties" onClick= {this.calChange} >Twenties:</div>
-            <div  className ="col-tens">Tens:</div>
-            <div className ="col-fives">Fives:</div>
-            <div className ="col-ones">Ones:</div> 
-            <div className ="col-quarters">Quarters:</div>
-            <div className ="col-dimes">Dimes:</div>
-            <div className ="col-nickels">Nickels:</div>
-            <div className ="col-pennies">Pennies:</div>
+          <div className="grid-Deno bg-light" id="secondCon" >
+            
+            <div className = 'alert alert-success text-center lead' role='alert' onClick= {this.calChange} ><p className = 'lead'>Success:Total Change: ${this.state.changeDue} </p> </div>
+            
+            <div className ="col-twenties text-info" onClick= {this.calculate} > <p className = 'lead'>Twenties:
+            {this.state.twenties}</p></div>
+            <div  className ="col-tens text-info"><p className = 'lead'>Tens:
+            {this.state.tens}</p></div> 
+            <div className ="col-fives text-info"><p className = 'lead'>Fives:
+            {this.state.fives}</p></div>
+            <div className ="col-ones text-info"><p className = 'lead'> Ones:
+            {this.state.ones}</p></div> 
+            <div className ="col-quarters text-info"> <p className = 'lead'>Quarters:
+            {this.state.quarter}</p></div>
+            <div className ="col-dimes text-info"><p className = 'lead'>Dimes:
+            {this.state.dime}</p></div>
+            <div className ="col-nickels text-info"><p className = 'lead'> Nickels:
+            {this.state.nickel}</p></div>
+            <div className ="col-pennies text-info"><p className = 'lead'> Pennies:
+            {this.state.penny}</p></div>
+
+            <div className = 'alert alert-danger text-center lead' role='alert' onClick= {this.calChange} ><p className = 'lead'>Danger:Additional Money Owed: ${this.state.changeDue} </p> </div>
+
+            </div>
             
           </div>
         
         </div>
-        
+  
       </div>
      );
   }
