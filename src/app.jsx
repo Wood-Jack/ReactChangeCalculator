@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 
+
 class App extends React.Component {
 
   constructor(props) {
 
     super(props);
 
-    this.state={moneyDue: ' ', moneyRec: ' ' , changeOutput: undefined};
+    this.state={moneyDue: ' ', moneyRec: ' ' , changeOutput: undefined };
 
     this.moneyDueChange = this.moneyDueChange.bind(this);
     this.moneyRecChange = this.moneyRecChange.bind(this);
@@ -23,9 +24,10 @@ class App extends React.Component {
   }
 
   
-
+  
   calChange(e)
   {
+    
 
     e.preventDefault();
 
@@ -57,23 +59,31 @@ class App extends React.Component {
 
     let penniesDue = Math.round(nickelsLeft / 0.01);
 
-
     this.setState({
-      changeOutput: changeDue, twenties: twentiesDue,tens: tensDue ,fives: fivesDue, ones: coinsDue
-       , quarter: quartersDue , dime: dimesDue , nickel: nickelsDue, penny: penniesDue
+      changeOutput: changeDue, 
+      twenties: twentiesDue,
+      tens: tensDue ,
+      fives: fivesDue, 
+      ones: coinsDue, 
+      quarter: quartersDue,
+      dime: dimesDue ,
+      nickel: nickelsDue,
+      penny: penniesDue
+
     });
 
+    console.log();
   }
 
   displayAlert(){
 
-    if(this.state.calChange >= 0)
+    if(this.state.changeOutput >= 0)
     {
       
       return <p>{this.state.changeOutput}</p> ;
 
     }
-    else(this.state.calChange < 0)
+    else(this.state.changeOutput < 0)
     {
 
       return -1; 
@@ -110,7 +120,7 @@ class App extends React.Component {
 
           <div className="grid-Deno bg-light" id="secondCon" >
             
-            <div className = 'alert alert-success text-center lead' role='alert' onClick= {this.calChange} ><p className = 'lead'>Success:Total Change: ${this.displayAlert} </p> </div>
+            <div className = 'alert alert-success text-center lead' role='alert' onClick= {this.calChange} ><p className = 'lead'>Success:Total Change: ${this.state.changeOutput} </p> </div>
             
             <div className ="col-twenties text-info" onClick= {this.calculate} > <p className = 'lead'>Twenties:
             {this.state.twenties}</p></div>
