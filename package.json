@@ -38,8 +38,9 @@
   "dependencies": {
     "axios": "^0.21.1",
     "chai": "^4.3.4",
+    "eslint": "^7.32.0",
     "expect": "^27.0.6",
-    "express": "^4.17.1", 
+    "express": "^4.17.1",
     "json-loader": "^0.5.7",
     "lodash": "^4.17.21",
     "morgan": "^1.10.0",
@@ -48,6 +49,6 @@
     "parcel-bundler": "^1.12.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "serve-favicon": "^2.5.0" 
+    "serve-favicon": "^2.5.0"
   }
 }

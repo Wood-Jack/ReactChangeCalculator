@@ -4,15 +4,14 @@ import React, { Component } from 'react';
 class App extends React.Component {
 
   constructor(props) {
-
+    
     super(props);
-
-    this.state={moneyDue: ' ', moneyRec: ' ' , changeOutput: undefined };
-
+    this.state={moneyDue: ' ', moneyRec: ' ' , changeOutput: undefined , displayer: false};
     this.moneyDueChange = this.moneyDueChange.bind(this);
     this.moneyRecChange = this.moneyRecChange.bind(this);
     this.calChange = this.calChange.bind(this);
- 
+    this.handleDisplay = this.handleDisplay.bind(this);
+
   }
   
   moneyDueChange(e){
@@ -23,11 +22,26 @@ class App extends React.Component {
     this.setState({moneyRec: e.target.value});
   }
 
-  
+  handleDisplay(e)
+  {
+    const moneyDue = this.state.moneyDue;
+    const moneyRec= this.state.moneyRec;
+    const changeLeft = ( moneyRec- moneyDue);
+
+    if(changeLeft >= 0 )
+    {
+
+     return this.setState({ displayer: !this.state.displayer});
+    }
+    else
+    {
+
+      return this.setState({displayer: this.state.displayer});
+    }
+  }
   
   calChange(e)
   {
-    
 
     e.preventDefault();
 
@@ -46,9 +60,9 @@ class App extends React.Component {
     let fivesLeft = tensLeft % 5.00;
 
     let dollarsDue= Math.floor(fivesLeft/1);
-    let coinsDue = fivesLeft % 1;
+    let coinsDue= fivesLeft % 1;
     
-    let quartersDue = Math.floor(coinsDue / 0.25);
+    let quartersDue = Math.floor(coinsDue / 0.25); 
     let quartersLeft = coinsDue % 0.25;
 
     let dimesDue= Math.floor(quartersLeft / 0.10);
@@ -60,6 +74,7 @@ class App extends React.Component {
     let penniesDue = Math.round(nickelsLeft / 0.01);
 
     this.setState({
+      
       changeOutput: changeDue, 
       twenties: twentiesDue,
       tens: tensDue ,
@@ -72,30 +87,9 @@ class App extends React.Component {
 
     });
 
-    console.log();
   }
-
-  displayAlert(){
-
-    if(this.state.changeOutput >= 0)
-    {
-      
-      return <p>{this.state.changeOutput}</p> ;
-
-    }
-    else(this.state.changeOutput < 0)
-    {
-
-      return -1; 
-
-    }
-
-  }
-
 
   render() {
-
-
     return(
 
       <div className ="container d-flex justify-content-center mt-5 " >
@@ -113,14 +107,11 @@ class App extends React.Component {
           
           </div>
           
-          <div className="col-8 ">
-            
-          
-          
-
+          <div className="col-8 ">            
           <div className="grid-Deno bg-light" id="secondCon" >
             
-            <div className = 'alert alert-success text-center lead' role='alert' onClick= {this.calChange} ><p className = 'lead'>Success:Total Change: ${this.state.changeOutput} </p> </div>
+            <div className = 'alert alert-success text-center lead' role='alert' onClick= {this.calChange} >
+              <p className = 'lead'>Success:Total Change: ${this.state.changeOutput} </p> </div>
             
             <div className ="col-twenties text-info" onClick= {this.calculate} > <p className = 'lead'>Twenties:
             {this.state.twenties}</p></div>
